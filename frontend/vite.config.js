@@ -7,5 +7,8 @@ export default defineConfig({
     server: {
         host: true,
         port: 3000,
+        hmr: {
+            host: '192.168.86.39'
+        }
     }
 })

@@ -12,6 +12,12 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Request logger
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const embeddingModel = genAI.getGenerativeModel({ model: "text-embedding-004" });
@@ -109,7 +115,7 @@ app.post('/api/search', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Backend listening at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Backend listening at http://0.0.0.0:${port}`);
   initChroma();
 });
