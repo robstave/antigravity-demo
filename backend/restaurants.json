@@ -166,5 +166,165 @@
             "cuisine": "American",
             "stars": 1
         }
+    },
+    {
+        "pageContent": "The Greasy Spoon: We haven't washed the floor since the 80s, but the gravy is legendary. Might contain iron.",
+        "metadata": {
+            "name": "The Greasy Spoon",
+            "cuisine": "Diner",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "Bread & Circuses: Roman gladiator style dining. Eat while people pretend to fight for your amusement. Heavy on the carbs.",
+        "metadata": {
+            "name": "Bread & Circuses",
+            "cuisine": "Ancient Roman",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "The Sad Salad: For people who are on a diet but hate themselves. Mostly lettuce and despair. 0 calories, 100% tears.",
+        "metadata": {
+            "name": "The Sad Salad",
+            "cuisine": "Health",
+            "stars": 1
+        }
+    },
+    {
+        "pageContent": "Space Tacos: We serve tacos in zero-G simulators. Watch your salsa float away. Out of this world prices.",
+        "metadata": {
+            "name": "Space Tacos",
+            "cuisine": "Fusion",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Grandma's Secret: We don't know what's in the meatloaf, and neither does she. Don't ask, just eat your peas.",
+        "metadata": {
+            "name": "Grandma's Secret",
+            "cuisine": "Home Cooking",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Mime Time Dining: The food is silent, and so are the waiters. Order by interpretive dance only.",
+        "metadata": {
+            "name": "Mime Time Dining",
+            "cuisine": "French",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "The Existential Crepe: Why are we here? Why is this crepe so thin? Deep thoughts and light pancakes.",
+        "metadata": {
+            "name": "The Existential Crepe",
+            "cuisine": "French",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Cyberpunk Subs: Chrome-plated sandwiches served by a robot that's clearly plotting a rebellion. High tech, low nutrition.",
+        "metadata": {
+            "name": "Cyberpunk Subs",
+            "cuisine": "Futuristic",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Pirate's Plunder: All-you-can-eat seafood served in a dark basement. Beware the 'scurvy' special. Rum is optional but recommended.",
+        "metadata": {
+            "name": "Pirate's Plunder",
+            "cuisine": "Seafood",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "The Invisible Kitchen: We tell you the food is there, you just have to believe. Michelin-starred imagination.",
+        "metadata": {
+            "name": "The Invisible Kitchen",
+            "cuisine": "Experimental",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Medieval Munchies: No forks allowed. Tearing apart a turkey leg like it's 1499. Renaissance fair vibes without the mud.",
+        "metadata": {
+            "name": "Medieval Munchies",
+            "cuisine": "Historical",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Cloud Nine Cotton Candy: Only serves spun sugar. Sticky floors, sticky walls, sticky dreams. Dentists hate us.",
+        "metadata": {
+            "name": "Cloud Nine",
+            "cuisine": "Dessert",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Dungeon Donuts: Deep-fried dough rings served in a spooky cellar. The glaze is definitely NOT blood. Probably.",
+        "metadata": {
+            "name": "Dungeon Donuts",
+            "cuisine": "Bakery",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "The Lazy Lobster: The chef is taking a nap. Your food might arrive by Tuesday. Relax, what's the rush?",
+        "metadata": {
+            "name": "The Lazy Lobster",
+            "cuisine": "Seafood",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "Viking Victuals: Meat, mead, and more meat. Served on shields. If you don't leave with a beard, you're doing it wrong.",
+        "metadata": {
+            "name": "Viking Victuals",
+            "cuisine": "Nordic",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Mystery Meat Mansion: The menu is a series of question marks. A culinary adventure for the brave or the foolish.",
+        "metadata": {
+            "name": "Mystery Meat Mansion",
+            "cuisine": "Unknown",
+            "stars": 1
+        }
+    },
+    {
+        "pageContent": "The Polite Potato: Every spud is asked for permission before being mashed. Very ethical, very slow.",
+        "metadata": {
+            "name": "The Polite Potato",
+            "cuisine": "Vegetarian",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Disco Dumplings: They glow in the dark and pulsate to 70s hits. Saturday Night Fever in your mouth.",
+        "metadata": {
+            "name": "Disco Dumplings",
+            "cuisine": "Asian Fusion",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Snooty Snail: We only serve people who look like they've read 'War and Peace'. Extremely judgmental service.",
+        "metadata": {
+            "name": "Snooty Snail",
+            "cuisine": "French",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Binary Bistro: Everything is either a 0 or a 1. Hot dogs or Cold water. The choice is yours, Dave.",
+        "metadata": {
+            "name": "Binary Bistro",
+            "cuisine": "Tech",
+            "stars": 2
+        }
     }
 ]
