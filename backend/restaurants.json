@@ -1,0 +1,170 @@
+[
+    {
+        "pageContent": "Chucks: American Fare. Tasty burgers and fries in an informal setting. Not Overpriced",
+        "metadata": {
+            "name": "Chucks",
+            "cuisine": "American",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "Bella Italia: Classic Italian. Authentic pasta and pizza in a cozy atmosphere.",
+        "metadata": {
+            "name": "Bella Italia",
+            "cuisine": "Italian",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Sushi Zen: Japanese Cuisine. Fresh sushi and sashimi with a traditional vibe. $2 Sake bombs on Fridays.",
+        "metadata": {
+            "name": "Sushi Zen",
+            "cuisine": "Japanese",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Taco Loco: Mexican Fiesta. Lively spot for tacos, burritos, and margaritas. Hottest salsa in town.",
+        "metadata": {
+            "name": "Taco Loco",
+            "cuisine": "Mexican",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "The Curry House: Indian Spices. Rich and flavorful curries and naan bread.",
+        "metadata": {
+            "name": "The Curry House",
+            "cuisine": "Indian",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Le Bistro: French Delights. Elegant French dining with classic dishes.",
+        "metadata": {
+            "name": "Le Bistro",
+            "cuisine": "French",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Peking Garden: Chinese Cuisine. Wide variety of Chinese dishes in a family-friendly setting. Authentic Bao",
+        "metadata": {
+            "name": "Peking Garden",
+            "cuisine": "Chinese",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Greek Islands Taverna: Mediterranean Flavors. Fresh seafood and Greek specialties.",
+        "metadata": {
+            "name": "Greek Islands Taverna",
+            "cuisine": "Greek",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Steakhouse 77: Premium Steaks. High-end steakhouse with aged cuts and fine wines. Dress code.",
+        "metadata": {
+            "name": "Steakhouse 77",
+            "cuisine": "American",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Vegan Paradise: Plant-Based Meals. Creative vegan dishes in a modern setting.",
+        "metadata": {
+            "name": "Vegan Paradise",
+            "cuisine": "Vegan",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Pasta Pronto: Quick Italian. Fast and casual Italian pasta and salads.",
+        "metadata": {
+            "name": "Pasta Pronto",
+            "cuisine": "Italian",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Ramen Republic: Noodle Bar. Authentic ramen and Japanese appetizers. Famous chef.",
+        "metadata": {
+            "name": "Ramen Republic",
+            "cuisine": "Japanese",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Burro Burrito: Tex-Mex Grill. Large burritos and Tex-Mex favorites.",
+        "metadata": {
+            "name": "Burro Burrito",
+            "cuisine": "Mexican",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "Spice Merchant: Indian Cuisine. Authentic Indian spices and dishes, known for biryani. Goat and Lamb too.",
+        "metadata": {
+            "name": "Spice Merchant",
+            "cuisine": "Indian",
+            "stars": 5
+        }
+    },
+    {
+        "pageContent": "Cafe de Paris: French Cafe. Casual French cafe with pastries and light meals.",
+        "metadata": {
+            "name": "Cafe de Paris",
+            "cuisine": "French",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Golden Dragon: Dim Sum House. Traditional dim sum and Cantonese dishes.",
+        "metadata": {
+            "name": "Golden Dragon",
+            "cuisine": "Chinese",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Olive Branch Bistro: Mediterranean Cuisine. Healthy Mediterranean options with a focus on olive oil. Breadsticks, but limit 4",
+        "metadata": {
+            "name": "Olive Branch Bistro",
+            "cuisine": "Greek",
+            "stars": 4
+        }
+    },
+    {
+        "pageContent": "Burger Barn: Classic Burgers. Casual and delicious burgers, fries and milkshakes. Nothing Fancy",
+        "metadata": {
+            "name": "Burger Barn",
+            "cuisine": "American",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Noodle Nook: Asian Noodles. Variety of Asian noodle dishes from different regions.",
+        "metadata": {
+            "name": "Noodle Nook",
+            "cuisine": "Asian Fusion",
+            "stars": 3
+        }
+    },
+    {
+        "pageContent": "Pizza Palace: Family Pizza. Large pizzas and family-friendly atmosphere. Retro games",
+        "metadata": {
+            "name": "Pizza Palace",
+            "cuisine": "Italian",
+            "stars": 2
+        }
+    },
+    {
+        "pageContent": "Dougs: Sammies and beans. Not recommended. Low prices. Happy Hour",
+        "metadata": {
+            "name": "Dougs",
+            "cuisine": "American",
+            "stars": 1
+        }
+    }
+]

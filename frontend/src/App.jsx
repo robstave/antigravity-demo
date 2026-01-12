@@ -1,39 +1,171 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom'
+import { Search, List, Star, Info } from 'lucide-react'
 import './App.css'
 
-function App() {
-    const [number, setNumber] = useState(null)
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
+const Navbar = () => (
+    <nav>
+        <NavLink to="/" end>Landing Page</NavLink>
+        <NavLink to="/list">Restaurant List</NavLink>
+    </nav>
+)
+
+const LandingPage = () => {
+    const [query, setQuery] = useState('')
+    const [threshold, setThreshold] = useState(0.5)
+    const [size, setSize] = useState(5)
+    const [results, setResults] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const fetchRandomNumber = async () => {
+    const handleSearch = async (e) => {
+        e.preventDefault()
+        if (!query) return
         setLoading(true)
         try {
-            const response = await fetch('http://localhost:5000/api/random')
+            const response = await fetch(`${API_URL}/api/search`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query, threshold, size })
+            })
             const data = await response.json()
-            setNumber(data.number)
+            setResults(data)
         } catch (error) {
-            console.error('Error fetching random number:', error)
-            alert('Failed to fetch number from backend')
+            console.error('Search error:', error)
+            alert('Search failed. Is the backend running?')
         } finally {
             setLoading(false)
         }
     }
 
+    const thresholds = Array.from({ length: 11 }, (_, i) => (i / 10).toFixed(1))
+    const sizes = [1, 3, 5, 8, 10]
+
     return (
-        <div className="container">
-            <h1>Hello World!</h1>
-            <p>Click the button below to get a random number from the backend.</p>
-            <div className="card">
-                <button onClick={fetchRandomNumber} disabled={loading}>
-                    {loading ? 'Fetching...' : 'Get Random Number'}
-                </button>
-                {number !== null && (
-                    <div className="result">
-                        <p>Your random number is: <strong>{number}</strong></p>
+        <div className="search-page">
+            <h1>Vector Restaurant Search</h1>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
+                Search for restaurants using natural language. Powered by Gemini Embeddings.
+            </p>
+
+            <div className="search-container">
+                <form className="search-form" onSubmit={handleSearch}>
+                    <div className="input-group">
+                        <label>What are you looking for?</label>
+                        <input
+                            type="text"
+                            placeholder="e.g. cheap burgers or spicy mexican food"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
                     </div>
+
+                    <div className="controls-row">
+                        <div className="input-group">
+                            <label>Similarity Threshold</label>
+                            <select value={threshold} onChange={(e) => setThreshold(e.target.value)}>
+                                {thresholds.map(t => <option key={t} value={t}>{t}</option>)}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label>Result Size</label>
+                            <select value={size} onChange={(e) => setSize(e.target.value)}>
+                                {sizes.map(s => <option key={s} value={s}>{s}</option>)}
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Searching...' : 'Find Restaurants'}
+                    </button>
+                </form>
+            </div>
+
+            <div className="results-list">
+                {results.length > 0 ? (
+                    results.map((r, i) => (
+                        <div key={i} className="result-card">
+                            <div className="result-header">
+                                <h3>{r.metadata.name}</h3>
+                                <span className="score-badge">{(r.score * 100).toFixed(1)}% Match</span>
+                            </div>
+                            <p style={{ margin: '0.5rem 0', fontSize: '0.9rem' }}>{r.content}</p>
+                            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                <span>{r.metadata.cuisine}</span>
+                                <span className="stars">{'★'.repeat(r.metadata.stars)}</span>
+                            </div>
+                        </div>
+                    ))
+                ) : query && !loading && (
+                    <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No results found above the threshold.</p>
                 )}
             </div>
         </div>
+    )
+}
+
+const RestaurantListPage = () => {
+    const [restaurants, setRestaurants] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        fetch(`${API_URL}/api/restaurants`)
+            .then(res => res.json())
+            .then(data => {
+                setRestaurants(data)
+                setLoading(false)
+            })
+            .catch(err => {
+                console.error(err)
+                setLoading(false)
+            })
+    }, [])
+
+    if (loading) return <div>Loading...</div>
+
+    return (
+        <div>
+            <h1>All Restaurants</h1>
+            <div className="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Cuisine</th>
+                            <th>Stars</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {restaurants.map((r, i) => (
+                            <tr key={i}>
+                                <td style={{ fontWeight: '600', color: 'var(--primary)' }}>{r.metadata.name}</td>
+                                <td>{r.metadata.cuisine}</td>
+                                <td className="stars">{'★'.repeat(r.metadata.stars)}</td>
+                                <td style={{ fontSize: '0.85rem' }}>{r.pageContent}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+}
+
+function App() {
+    return (
+        <BrowserRouter>
+            <div className="app-container">
+                <Navbar />
+                <main>
+                    <Routes>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/list" element={<RestaurantListPage />} />
+                    </Routes>
+                </main>
+            </div>
+        </BrowserRouter>
     )
 }
 
