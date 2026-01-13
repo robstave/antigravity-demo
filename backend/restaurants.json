@@ -4,7 +4,8 @@
         "metadata": {
             "name": "Chucks",
             "cuisine": "American",
-            "stars": 2
+            "stars": 2,
+            "cost": 1
         }
     },
     {
@@ -12,7 +13,8 @@
         "metadata": {
             "name": "Bella Italia",
             "cuisine": "Italian",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -20,7 +22,8 @@
         "metadata": {
             "name": "Sushi Zen",
             "cuisine": "Japanese",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -28,7 +31,8 @@
         "metadata": {
             "name": "Taco Loco",
             "cuisine": "Mexican",
-            "stars": 3
+            "stars": 3,
+            "cost": 1
         }
     },
     {
@@ -36,7 +40,8 @@
         "metadata": {
             "name": "The Curry House",
             "cuisine": "Indian",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -44,7 +49,8 @@
         "metadata": {
             "name": "Le Bistro",
             "cuisine": "French",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -52,7 +58,8 @@
         "metadata": {
             "name": "Peking Garden",
             "cuisine": "Chinese",
-            "stars": 3
+            "stars": 3,
+            "cost": 2
         }
     },
     {
@@ -60,7 +67,8 @@
         "metadata": {
             "name": "Greek Islands Taverna",
             "cuisine": "Greek",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -68,7 +76,8 @@
         "metadata": {
             "name": "Steakhouse 77",
             "cuisine": "American",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -76,7 +85,8 @@
         "metadata": {
             "name": "Vegan Paradise",
             "cuisine": "Vegan",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -84,7 +94,8 @@
         "metadata": {
             "name": "Pasta Pronto",
             "cuisine": "Italian",
-            "stars": 3
+            "stars": 3,
+            "cost": 1
         }
     },
     {
@@ -92,7 +103,8 @@
         "metadata": {
             "name": "Ramen Republic",
             "cuisine": "Japanese",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -100,7 +112,8 @@
         "metadata": {
             "name": "Burro Burrito",
             "cuisine": "Mexican",
-            "stars": 2
+            "stars": 2,
+            "cost": 1
         }
     },
     {
@@ -108,7 +121,8 @@
         "metadata": {
             "name": "Spice Merchant",
             "cuisine": "Indian",
-            "stars": 5
+            "stars": 5,
+            "cost": 2
         }
     },
     {
@@ -116,7 +130,8 @@
         "metadata": {
             "name": "Cafe de Paris",
             "cuisine": "French",
-            "stars": 3
+            "stars": 3,
+            "cost": 2
         }
     },
     {
@@ -124,7 +139,8 @@
         "metadata": {
             "name": "Golden Dragon",
             "cuisine": "Chinese",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -132,7 +148,8 @@
         "metadata": {
             "name": "Olive Branch Bistro",
             "cuisine": "Greek",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -140,7 +157,8 @@
         "metadata": {
             "name": "Burger Barn",
             "cuisine": "American",
-            "stars": 3
+            "stars": 3,
+            "cost": 1
         }
     },
     {
@@ -148,7 +166,8 @@
         "metadata": {
             "name": "Noodle Nook",
             "cuisine": "Asian Fusion",
-            "stars": 3
+            "stars": 3,
+            "cost": 2
         }
     },
     {
@@ -156,7 +175,8 @@
         "metadata": {
             "name": "Pizza Palace",
             "cuisine": "Italian",
-            "stars": 2
+            "stars": 2,
+            "cost": 2
         }
     },
     {
@@ -164,7 +184,8 @@
         "metadata": {
             "name": "Dougs",
             "cuisine": "American",
-            "stars": 1
+            "stars": 1,
+            "cost": 1
         }
     },
     {
@@ -172,7 +193,8 @@
         "metadata": {
             "name": "The Greasy Spoon",
             "cuisine": "Diner",
-            "stars": 2
+            "stars": 2,
+            "cost": 1
         }
     },
     {
@@ -180,7 +202,8 @@
         "metadata": {
             "name": "Bread & Circuses",
             "cuisine": "Ancient Roman",
-            "stars": 4
+            "stars": 4,
+            "cost": 3
         }
     },
     {
@@ -188,7 +211,8 @@
         "metadata": {
             "name": "The Sad Salad",
             "cuisine": "Health",
-            "stars": 1
+            "stars": 1,
+            "cost": 2
         }
     },
     {
@@ -196,7 +220,8 @@
         "metadata": {
             "name": "Space Tacos",
             "cuisine": "Fusion",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -204,7 +229,8 @@
         "metadata": {
             "name": "Grandma's Secret",
             "cuisine": "Home Cooking",
-            "stars": 3
+            "stars": 3,
+            "cost": 1
         }
     },
     {
@@ -212,7 +238,8 @@
         "metadata": {
             "name": "Mime Time Dining",
             "cuisine": "French",
-            "stars": 2
+            "stars": 2,
+            "cost": 2
         }
     },
     {
@@ -220,7 +247,8 @@
         "metadata": {
             "name": "The Existential Crepe",
             "cuisine": "French",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -228,7 +256,8 @@
         "metadata": {
             "name": "Cyberpunk Subs",
             "cuisine": "Futuristic",
-            "stars": 3
+            "stars": 3,
+            "cost": 1
         }
     },
     {
@@ -236,7 +265,8 @@
         "metadata": {
             "name": "Pirate's Plunder",
             "cuisine": "Seafood",
-            "stars": 2
+            "stars": 2,
+            "cost": 1
         }
     },
     {
@@ -244,7 +274,8 @@
         "metadata": {
             "name": "The Invisible Kitchen",
             "cuisine": "Experimental",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -252,7 +283,8 @@
         "metadata": {
             "name": "Medieval Munchies",
             "cuisine": "Historical",
-            "stars": 3
+            "stars": 3,
+            "cost": 2
         }
     },
     {
@@ -260,7 +292,8 @@
         "metadata": {
             "name": "Cloud Nine",
             "cuisine": "Dessert",
-            "stars": 4
+            "stars": 4,
+            "cost": 1
         }
     },
     {
@@ -268,7 +301,8 @@
         "metadata": {
             "name": "Dungeon Donuts",
             "cuisine": "Bakery",
-            "stars": 3
+            "stars": 3,
+            "cost": 1
         }
     },
     {
@@ -276,7 +310,8 @@
         "metadata": {
             "name": "The Lazy Lobster",
             "cuisine": "Seafood",
-            "stars": 2
+            "stars": 2,
+            "cost": 2
         }
     },
     {
@@ -284,7 +319,8 @@
         "metadata": {
             "name": "Viking Victuals",
             "cuisine": "Nordic",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -292,7 +328,8 @@
         "metadata": {
             "name": "Mystery Meat Mansion",
             "cuisine": "Unknown",
-            "stars": 1
+            "stars": 1,
+            "cost": 1
         }
     },
     {
@@ -300,7 +337,8 @@
         "metadata": {
             "name": "The Polite Potato",
             "cuisine": "Vegetarian",
-            "stars": 4
+            "stars": 4,
+            "cost": 2
         }
     },
     {
@@ -308,7 +346,8 @@
         "metadata": {
             "name": "Disco Dumplings",
             "cuisine": "Asian Fusion",
-            "stars": 3
+            "stars": 3,
+            "cost": 2
         }
     },
     {
@@ -316,7 +355,8 @@
         "metadata": {
             "name": "Snooty Snail",
             "cuisine": "French",
-            "stars": 5
+            "stars": 5,
+            "cost": 3
         }
     },
     {
@@ -324,7 +364,8 @@
         "metadata": {
             "name": "Binary Bistro",
             "cuisine": "Tech",
-            "stars": 2
+            "stars": 2,
+            "cost": 1
         }
     }
 ]

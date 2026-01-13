@@ -16,21 +16,25 @@ const LandingPage = () => {
     const [query, setQuery] = useState('')
     const [threshold, setThreshold] = useState(0.5)
     const [size, setSize] = useState(5)
+    const [minStars, setMinStars] = useState(0)
     const [results, setResults] = useState([])
+    const [summary, setSummary] = useState('')
     const [loading, setLoading] = useState(false)
 
     const handleSearch = async (e) => {
         e.preventDefault()
         if (!query) return
         setLoading(true)
+        setSummary('')
         try {
             const response = await fetch(`${API_URL}/api/search`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query, threshold, size })
+                body: JSON.stringify({ query, threshold, size, minStars })
             })
             const data = await response.json()
-            setResults(data)
+            setResults(data.results)
+            setSummary(data.summary)
         } catch (error) {
             console.error('Search error:', error)
             alert('Search failed. Is the backend running?')
@@ -41,6 +45,7 @@ const LandingPage = () => {
 
     const thresholds = Array.from({ length: 11 }, (_, i) => (i / 10).toFixed(1))
     const sizes = [1, 3, 5, 8, 10]
+    const starOptions = [0, 1, 2, 3, 4, 5]
 
     return (
         <div className="search-page">
@@ -76,11 +81,37 @@ const LandingPage = () => {
                         </div>
                     </div>
 
+                    <div className="controls-row">
+                        <div className="input-group">
+                            <label>Minimum Stars</label>
+                            <select value={minStars} onChange={(e) => setMinStars(e.target.value)}>
+                                {starOptions.map(s => <option key={s} value={s}>{s === 0 ? 'Any' : s + '+'}</option>)}
+                            </select>
+                        </div>
+                    </div>
+
                     <button type="submit" disabled={loading}>
                         {loading ? 'Searching...' : 'Find Restaurants'}
                     </button>
                 </form>
             </div>
+
+            {summary && (
+                <div className="ai-summary" style={{
+                    marginTop: '2rem',
+                    padding: '1.5rem',
+                    background: 'rgba(99, 102, 241, 0.1)',
+                    borderLeft: '4px solid var(--primary)',
+                    borderRadius: '0.5rem',
+                    fontStyle: 'italic',
+                    color: 'var(--text)'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--primary)', fontWeight: 'bold' }}>
+                        <Info size={18} /> Critic's Take
+                    </div>
+                    {summary}
+                </div>
+            )}
 
             <div className="results-list">
                 {results.length > 0 ? (
@@ -91,14 +122,15 @@ const LandingPage = () => {
                                 <span className="score-badge">{(r.score * 100).toFixed(1)}% Match</span>
                             </div>
                             <p style={{ margin: '0.5rem 0', fontSize: '0.9rem' }}>{r.content}</p>
-                            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                                 <span>{r.metadata.cuisine}</span>
                                 <span className="stars">{'★'.repeat(r.metadata.stars)}</span>
+                                <span style={{ color: 'var(--accent)' }}>{'$'.repeat(r.metadata.cost)}</span>
                             </div>
                         </div>
                     ))
                 ) : query && !loading && (
-                    <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No results found above the threshold.</p>
+                    <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No results found matching your criteria.</p>
                 )}
             </div>
         </div>
@@ -134,6 +166,7 @@ const RestaurantListPage = () => {
                             <th>Name</th>
                             <th>Cuisine</th>
                             <th>Stars</th>
+                            <th>Cost</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -143,6 +176,7 @@ const RestaurantListPage = () => {
                                 <td style={{ fontWeight: '600', color: 'var(--primary)' }}>{r.metadata.name}</td>
                                 <td>{r.metadata.cuisine}</td>
                                 <td className="stars">{'★'.repeat(r.metadata.stars)}</td>
+                                <td style={{ color: 'var(--accent)', fontWeight: 'bold' }}>{'$'.repeat(r.metadata.cost)}</td>
                                 <td style={{ fontSize: '0.85rem' }}>{r.pageContent}</td>
                             </tr>
                         ))}
