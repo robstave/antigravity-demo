@@ -3,8 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAIEmbeddings } = require("@langchain/google-genai");
 const { ChromaClient } = require('chromadb');
+const { PrismaClient } = require('@prisma/client');
 const fs = require('fs');
 const path = require('path');
+
+const prisma = new PrismaClient();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -35,16 +38,68 @@ const llmModel = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 const client = new ChromaClient({ path: process.env.CHROMA_URL || "http://chroma:8000" });
 let collection;
 
-console.log("Loading restaurants...");
-const restaurants = JSON.parse(fs.readFileSync(path.join(__dirname, 'restaurants.json'), 'utf8'));
+// Initialize Chroma - only populate if empty
+async function initChroma() {
+  try {
+    // Sync logic: Ensure DB is seeded from JSON if empty
+    const count = await prisma.restaurant.count();
+    if (count === 0) {
+      console.log("SQL Database is empty. Seeding from JSON...");
+      const jsonRestaurants = JSON.parse(fs.readFileSync(path.join(__dirname, 'restaurants.json'), 'utf8'));
 
-// Populate Chroma with embeddings (called manually or on first run)
-async function populateChroma() {
-  console.log("Generating embeddings and populating Chroma...");
+      for (const r of jsonRestaurants) {
+        await prisma.restaurant.create({
+          data: {
+            name: r.metadata.name,
+            cuisine: r.metadata.cuisine,
+            stars: r.metadata.stars,
+            cost: r.metadata.cost,
+            description: r.pageContent,
+            isIndexed: false
+          }
+        });
+      }
+      console.log("Seeding complete.");
+    }
 
-  const documents = restaurants.map(r => r.pageContent);
-  const metadatas = restaurants.map(r => r.metadata);
-  const ids = restaurants.map((_, i) => `id${i}`);
+    // Check Chroma
+    try {
+      collection = await client.getCollection({ name: "restaurants" });
+    } catch (e) {
+      collection = await client.createCollection({
+        name: "restaurants",
+        metadata: { "hnsw:space": "cosine" }
+      });
+    }
+
+    // Auto-sync any unindexed rows
+    await syncToChroma();
+
+  } catch (error) {
+    console.error("Error initializing system:", error);
+  }
+}
+
+// Sync function: Finds unindexed rows -> Embeds -> Pushes to Chroma -> Marks indexed
+async function syncToChroma() {
+  const unindexed = await prisma.restaurant.findMany({ where: { isIndexed: false } });
+
+  if (unindexed.length === 0) {
+    console.log("All restaurants allow synced.");
+    return;
+  }
+
+  console.log(`Syncing ${unindexed.length} restaurants to Chroma...`);
+
+  const documents = unindexed.map(r => r.description);
+  const metadatas = unindexed.map(r => ({
+    name: r.name,
+    cuisine: r.cuisine,
+    stars: r.stars,
+    cost: r.cost,
+    sqlId: r.id
+  }));
+  const ids = unindexed.map(r => `sql_${r.id}`);
 
   const embeddingValues = await embeddings.embedDocuments(documents);
 
@@ -55,89 +110,69 @@ async function populateChroma() {
     documents
   });
 
-  console.log("Chroma populated successfully with", documents.length, "documents.");
-}
+  // Mark as indexed
+  await prisma.restaurant.updateMany({
+    where: { id: { in: unindexed.map(r => r.id) } },
+    data: { isIndexed: true, chromaId: `sql_` } // simple marker, ideally we store the full ID map
+  });
 
-// Initialize Chroma - only populate if empty
-async function initChroma() {
-  try {
-    // Try to get existing collection
-    console.log("initChroma: Checking for existing collection...");
-    try {
-      collection = await client.getCollection({ name: "restaurants" });
-      const count = await collection.count();
-      console.log(`Found existing collection with ${count} documents.`);
-
-      if (count === 0) {
-        console.log("Collection is empty, populating...");
-        await populateChroma();
-      } else {
-        console.log("Using existing data. Use /api/admin/repopulate to refresh.");
-      }
-    } catch (e) {
-      // Collection doesn't exist, create it
-      console.log("No existing collection found, creating new one...");
-      collection = await client.createCollection({
-        name: "restaurants",
-        metadata: { "hnsw:space": "cosine" }
-      });
-      await populateChroma();
-    }
-  } catch (error) {
-    console.error("Error initializing Chroma:", error);
-  }
+  console.log("Sync complete.");
 }
 
 // Routes
-app.get('/api/restaurants', (req, res) => {
-  res.json(restaurants);
+app.get('/api/restaurants', async (req, res) => {
+  const restaurants = await prisma.restaurant.findMany({ orderBy: { id: 'asc' } });
+  // Map back to expected frontend format if needed, or update frontend
+  const mapped = restaurants.map(r => ({
+    pageContent: r.description,
+    metadata: {
+      name: r.name,
+      cuisine: r.cuisine,
+      stars: r.stars,
+      cost: r.cost
+    }
+  }));
+  res.json(mapped);
 });
 
-// Admin: Clear the vector database
+// Admin: Clear SQL & Vector
 app.post('/api/admin/clear', async (req, res) => {
   try {
     await client.deleteCollection({ name: "restaurants" });
-    collection = await client.createCollection({
-      name: "restaurants",
-      metadata: { "hnsw:space": "cosine" }
-    });
-    console.log("Collection cleared.");
-    res.json({ message: "Vector database cleared successfully." });
+    await client.createCollection({ name: "restaurants", metadata: { "hnsw:space": "cosine" } });
+
+    // Reset SQL index status
+    await prisma.restaurant.updateMany({ data: { isIndexed: false } });
+
+    res.json({ message: "Vector DB cleared. SQL marked as unindexed." });
   } catch (error) {
-    console.error("Error clearing database:", error);
-    res.status(500).json({ error: "Failed to clear database" });
+    console.error(error);
+    res.status(500).json({ error: "Failed to clear" });
   }
 });
 
-// Admin: Repopulate the vector database
+// Admin: Repopulate (Sync)
 app.post('/api/admin/repopulate', async (req, res) => {
   try {
-    // Clear first
-    try {
-      await client.deleteCollection({ name: "restaurants" });
-    } catch (e) { }
-
-    collection = await client.createCollection({
-      name: "restaurants",
-      metadata: { "hnsw:space": "cosine" }
-    });
-
-    await populateChroma();
-    res.json({ message: `Vector database repopulated with ${restaurants.length} documents.` });
+    await syncToChroma();
+    res.json({ message: "Sync triggered." });
   } catch (error) {
-    console.error("Error repopulating database:", error);
-    res.status(500).json({ error: "Failed to repopulate database" });
+    console.error(error);
+    res.status(500).json({ error: "Sync failed" });
   }
 });
 
-// Admin: Get database status
+// Admin: Status
 app.get('/api/admin/status', async (req, res) => {
   try {
-    const count = await collection.count();
+    const vectorCount = await collection.count();
+    const sqlCount = await prisma.restaurant.count();
+    const unindexedCount = await prisma.restaurant.count({ where: { isIndexed: false } });
+
     res.json({
-      documentCount: count,
-      restaurantsInJson: restaurants.length,
-      needsRepopulate: count !== restaurants.length
+      documentCount: vectorCount,
+      restaurantsInJson: sqlCount,
+      needsRepopulate: unindexedCount > 0
     });
   } catch (error) {
     res.status(500).json({ error: "Failed to get status" });

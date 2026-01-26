@@ -9,7 +9,9 @@
     "dotenv": "^16.4.5",
     "@langchain/google-genai": "^0.1.2",
     "@langchain/core": "^0.3.18",
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.21.0",
+    "prisma": "^5.10.0",
+    "@prisma/client": "^5.10.0"
   },
   "scripts": {
     "start": "node index.js"
